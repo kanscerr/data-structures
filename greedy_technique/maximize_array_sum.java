@@ -6,7 +6,7 @@ package greedy_technique;
 import java.util.Arrays;
 import java.util.stream.*;
 public class maximize_array_sum {
-    void negate(int[] arr, int k){
+    void negate1(int[] arr, int k){ //negate different elements.
         Arrays.sort(arr);
         if(k >= arr.length){
             System.out.println("not possible!");
@@ -17,6 +17,27 @@ public class maximize_array_sum {
             }
         }
     }
+
+    void negate2(int[] arr, int k){ //can modify same element multiple times
+        Arrays.sort(arr);
+        int i = 0;
+        while(k > 0){
+            if(arr[i] == 0){
+                k = 0;
+            }
+            else if(arr[i] < 0){
+                arr[i] = -arr[i];
+                k--;
+                i = (i+1)%arr.length;
+            }
+            else{
+                Arrays.sort(arr);
+                i = 0;
+                arr[i] = -arr[i];
+                k--;
+            }
+        }
+    }
     int maxSum(int[] arr){
         return IntStream.of(arr).sum();
     }
@@ -24,7 +45,7 @@ public class maximize_array_sum {
         maximize_array_sum m = new maximize_array_sum();
         int[] arr = {2, 6, -4, 9, 0, 7, 8, 5};
         int k = 3;
-        m.negate(arr, k);
+        m.negate2(arr, k);
         System.out.println(Arrays.toString(arr));
         System.out.println("Max sum: "+m.maxSum(arr));
     }
