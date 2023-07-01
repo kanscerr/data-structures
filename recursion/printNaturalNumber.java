@@ -2,7 +2,7 @@
 package recursion;
 import java.util.Scanner;
 
-public class n_natural_numbers {
+public class printNaturalNumber {
     static void print(int n){
         if(n == 0){
             return;
@@ -11,16 +11,16 @@ public class n_natural_numbers {
         System.out.println(n);
     }
     static void printReverse(int n){
-        if(n == 0){
+        if(n <= 0){
             return;
         }
         System.out.println(n);
-        printReverse(--n);
+        printReverse(n-1);
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-//        print(n);
+        print(n);
         printReverse(n);
     }
 }
