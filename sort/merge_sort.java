@@ -1,36 +1,45 @@
 package sort;
+import java.util.Arrays;
+public class merge_sort{
+    static void merge(int[] arr, int l, int mid, int r){
+        int n1 = mid-l+1;
+        int n2 = r-mid;
+        int[] arr1 = new int[n1];
+        int[] arr2 = new int[n2];
+        //array copy
+        System.arraycopy(arr, l, arr1, 0, n1);
+        System.arraycopy(arr, mid+1, arr2, 0, n2);
 
-public class merge_sort {
-    static int[] arr = {65, 7, 13, 93, 57};
-    static int[] b = new int[arr.length];
-    static void sort(int[] arr, int s, int mid, int l){
-        int i = s;
-        int j = mid+1;
-        int k = s;
-        while(i<=mid && j<l){
-            if(arr[i] > arr[j]){
-                b[k] = arr[j];
-                j++;
+        int i=0, j=0, k=l;
+        while(i<n1 && j<n2){
+            if(arr1[i] < arr2[j]){
+                arr[k++] = arr1[i++];
             }
-            if(arr[i] < arr[j]){
-                b[k] = arr[i];
-                i++;
+            else{
+                arr[k++] = arr2[j++];
             }
-            k++;
+        }
+        //rest values left in the array
+        while(i<n1){
+            arr[k++] = arr1[i++];
+        }
+        while(j<n2){
+            arr[k++] = arr2[j++];
         }
     }
-    static void mergeSort(int[] arr, int s, int l){
-        if (s < l) {
-            int mid = (s+l)/2;
-            mergeSort(arr, s, mid);
-            mergeSort(arr, mid+1, l);
-            sort(arr, s, mid, l);
+    static void mergesort(int[] arr, int l, int r){
+        if(l<r){
+            int mid = (l+r)/2;
+            //divide
+            mergesort(arr, l, mid);
+            mergesort(arr, mid+1, r);
+            //conquer
+            merge(arr, l, mid, r);
         }
     }
-    public static void main(String[] args) {
-        mergeSort(arr, 0, arr.length);
-        for (int i = 0; i < b.length; i++) {
-            System.out.print(b[i]+" ");
-        }
+    public static void main(String[] args){
+        int[] arr = {12, 11, 13, 5, 6, 7};
+        mergesort(arr, 0, arr.length-1);
+        System.out.println(Arrays.toString(arr));
     }
 }
