@@ -10,18 +10,18 @@ class Graph{
     Graph(int x){
         this.vertices = x;
         for(int i=1;i<=x;i++){
-            adjList.put(i, new LinkedList<>());
+            adjList.put(i, new LinkedList<>()); //key=i, value=linkedlist
         }
     }
-    //bidirectional graph
     void addEdge(int src, int dst) {
+        //bidirectional graph
         adjList.get(src).add(dst);
         adjList.get(dst).add(src);
     }
     void print(){
-        for(int key : adjList.keySet()){
+        for(int key : adjList.keySet()){ //traversing through each key
             System.out.print(key+" : ");
-            for(int list : adjList.get(key)){
+            for(int list : adjList.get(key)){ //traversing through each node of the linkedlist of each key
                 System.out.print(list);
                 if(!(adjList.get(key).indexOf(list) == adjList.get(key).size()-1)){
                     System.out.print("-->");
