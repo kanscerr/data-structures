@@ -30,7 +30,7 @@ public class basic {
 
         //setting an iterator from head to tail
         System.out.print("print: ");
-        Iterator<Integer> x = l.listIterator();
+        Iterator x = l.listIterator();
         while(x.hasNext()){
             System.out.print(x.next()+" ");
         }
